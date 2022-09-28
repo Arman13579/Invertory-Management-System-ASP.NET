@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="work_01.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" lang="en-us" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+    <title><%: Page.Title %></title>
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/fontawesome/font-awesome.css" rel="stylesheet" />
+    <link href="Content/styleSheet.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-md bg-info navbar-dark border-bottom fixed-top">
+            <a class="navbar-brand" href="/">
+               LOGO
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-target="#menuBar" data-bs-toggle="collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuBar">
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-item" href="Default.aspx">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="ProductPage.aspx">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="Category.aspx">Category</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-item" href="Inventory.aspx">Inventory</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" href="Report.aspx">Report</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <%
+                        if (Request.IsAuthenticated)
+                        {
+                    %>
+                        <li class="navbar-text">Hi <%= Page.User.Identity.Name %></li>
+                        <li class="nav-item">
+                            <asp:LinkButton ID="signOut" CssClass="nav-link" OnClick="signOut_Click" runat="server">Log Out</asp:LinkButton>
+                        </li>
+                    <%
+                        }
+                        else
+                        { 
+                    %>
+                        <li class="nav-item"><a class="nav-link" href="register.aspx">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="loginPage.aspx">Login</a></li>
+                    <%
+
+                        }
+                    %>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div class="container">
+            <asp:ContentPlaceHolder ID="body" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+       
+    </form>
+    <div class="container">
+        <asp:ContentPlaceHolder ID="footer" runat="server">
+            
+            </asp:ContentPlaceHolder>
+    </div>
+    
+<footer class="bg-info" >
+
+</footer>
+
+    <script src="Scripts/jquery-3.6.0.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+</body>
+</html>
